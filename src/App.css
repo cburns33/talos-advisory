@@ -8,7 +8,7 @@
   --color-cool-steel: oklch(70.1% 0.03 220.5); /* #93a8ac */
 
   /* UI Palette (OKLCH) */
-  --bg: oklch(93.4% 0.02 87.2);             /* #F2E9DC */
+  --bg: oklch(0.9376 0.0199 77.31);             /* #f2e9dc */
   --bg-dark: oklch(88.9% 0.02 87.9);          /* #e6dac8 */
   --text: oklch(15.98% 0 0);                /* #1a1a1a */
   --text-muted: oklch(36.3% 0 0);           /* #4a4a4a */
