@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="761.35693"
+   height="534.28558"
+   id="svg127772"
+   sodipodi:version="0.32"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   version="1.0"
+   sodipodi:docname="JBL_logo.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs127774">
+    <clipPath
+       clip-rule="nonzero"
+       id="clp766">
+      <path
+         id="path7617"
+         d="M 353.2,269.72 L 381.55,269.72 L 381.55,259.96 L 353.2,259.96 L 353.2,269.72 z " />
+    </clipPath>
+    <clipPath
+       clip-rule="nonzero"
+       id="clp767">
+      <path
+         id="path7626"
+         d="M 353.2,269.72 L 381.55,269.72 L 381.55,259.96 L 353.2,259.96 L 353.2,269.72 z " />
+    </clipPath>
+    <clipPath
+       clip-rule="nonzero"
+       id="clp768">
+      <path
+         id="path7694"
+         d="M 884.27,1291.1 L 1053.9,1291.1 L 1053.9,1266.6 L 884.27,1266.6 L 884.27,1291.1 z " />
+    </clipPath>
+    <clipPath
+       clip-rule="nonzero"
+       id="clp769">
+      <path
+         id="path7724"
+         d="M 884.27,1291.1 L 1053.9,1291.1 L 1053.9,1266.6 L 884.27,1266.6 L 884.27,1291.1 z " />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="381.42857"
+     inkscape:cy="-81.428571"
+     inkscape:document-units="px"
+     inkscape:current-layer="svg127772"
+     inkscape:window-width="2560"
+     inkscape:window-height="1351"
+     inkscape:window-x="-9"
+     inkscape:window-y="-8"
+     height="101.7mm"
+     inkscape:showpageshadow="2"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata127777">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <rect
+     y="-2.9442748e-05"
+     x="-0.00042422998"
+     height="534.28558"
+     width="761.35693"
+     id="rect31246"
+     style="fill:#9d9d9d;fill-opacity:1;stroke:none;stroke-width:2.76082;stroke-miterlimit:4;stroke-dasharray:none" />
+  <path
+     d="m 122.5478,124.32326 h 88.00935 l -45.62503,99.59288 -42.38432,-99.59288 m 42.38432,162.12771 c 15.74914,0 28.48867,-12.73841 28.48867,-28.48792 0,-15.74989 -12.73953,-28.25671 -28.48867,-28.25671 -15.74913,0 -28.48866,12.50682 -28.48866,28.25671 0,15.74951 12.73953,28.48792 28.48866,28.48792 m 123.68084,83.84334 c -0.92861,14.59155 -8.57005,26.40359 -21.07848,31.03584 -38.6772,10.42248 -80.83026,15.28631 -115.8044,-8.33814 -15.05552,-19.91856 -10.42369,-71.79934 -10.42369,-71.79934 h 47.24741 c 0,0 -7.17893,62.53522 17.83388,64.15639 12.27717,1.85273 25.47905,-2.77952 29.41743,-14.12836 V 124.32326 h 51.87924 l 0.92861,245.97105 M 452.12713,134.97732 c 20.38486,11.34886 12.50843,68.78864 11.81466,107.00424 -2.7782,9.49611 -11.81466,11.11765 -18.53123,17.83424 6.71657,4.63225 18.99374,7.41138 18.99374,17.83384 0.92487,36.82643 5.5567,77.58995 -3.93822,113.48962 -7.41019,9.26453 -16.90526,14.12835 -28.25756,13.202 -34.97009,3.70548 -73.65134,2.7791 -109.55019,0.92635 V 127.56597 c 41.45945,-2.77952 104.91835,-6.02221 129.4688,7.41135 z m -81.06152,19.22381 v 91.48631 h 35.89885 c 8.33895,0 8.33895,-15.9811 8.33895,-15.9811 v -59.06093 c 0,0 0,-16.44428 -10.65479,-16.44428 z m 0,118.81665 v 107.93061 c 0,0 38.90845,4.63225 44.2378,-10.65408 v -81.06384 c -0.92877,-22.2349 -44.2378,-16.21269 -44.2378,-16.21269 m 222.11387,87.78044 c 0,35.89968 -47.24741,35.2049 -47.24741,1.15797 V 124.32326 h -50.49201 v 279.7864 h 143.36835 v -82.91699 h -45.62893 v 39.60555"
+     style="font-size:3.1527px;font-family:fnt0, Futura, Arial;letter-spacing:-0.063054;word-spacing:0;fill:#ffffff;fill-rule:nonzero;stroke:none;stroke-width:0.221283;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4"
+     id="path7191" />
+</svg>

@@ -1,0 +1,284 @@
+/* Global Reset */
+:root {
+  /* Brand Palette (OKLCH) */
+  --color-terracotta: oklch(65.3% 0.12 30.5);   /* #cf8570 */
+  --color-dusk-blue: oklch(46.48% 0.08 254.8);  /* #3d5a80 */
+  --color-sandy-brown: oklch(79.86% 0.15 63.98);/* #f4a261 */
+  --color-tropical-teal: oklch(69.98% 0.13 198.5);/* #28afb0 */
+  --color-cool-steel: oklch(70.1% 0.03 220.5); /* #93a8ac */
+
+  /* UI Palette (OKLCH) */
+  --bg: oklch(93.4% 0.02 87.2);             /* #F2E9DC */
+  --bg-dark: oklch(88.9% 0.02 87.9);          /* #e6dac8 */
+  --text: oklch(15.98% 0 0);                /* #1a1a1a */
+  --text-muted: oklch(36.3% 0 0);           /* #4a4a4a */
+
+  /* Legacy Aliases */
+  --primary: var(--color-terracotta);
+  --secondary: var(--color-dusk-blue);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden; /* Prevents horizontal scroll/overflow */
+}
+
+/* Headline Section */
+.headline-section {
+  padding: 0 2rem; /* Adds horizontal padding for mobile margins */
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.headline-line {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700; /* Bold */
+  font-size: 4rem;
+  line-height: 1.2;
+  color: var(--text);
+  text-align: left;
+}
+
+/* Rotating Text Animation */
+.rotating-text-container {
+  display: inline-block;
+  font-family: 'Kalam', cursive;
+  font-weight: 400; /* Regular */
+  height: 4.8rem; /* Set to match parent line-height (4rem * 1.2) */
+  vertical-align: bottom;
+  overflow: hidden;
+  position: relative;
+}
+
+.rotating-text-item {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%; /* Fill the container now that it has a width */
+  transition: transform 0.5s ease-in-out;
+}
+
+/* A helper class to disable the transition for the seamless loop jump */
+.rotating-text-container.no-transition .rotating-text-item {
+  transition: none;
+}
+
+/* Adjust font size on smaller screens for better layout */
+@media (max-width: 768px) {
+  .headline-line {
+    font-size: 2.5rem;
+  }
+  .rotating-text-container {
+    height: 2.7rem;
+  }
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+h1 { font-size: 4rem; margin-bottom: 1rem; }
+h2 { font-size: 3rem; }
+p { font-size: 1.1rem; line-height: 1.6; color: var(--text-muted); }
+
+/* Utilities */
+.text-primary { color: var(--primary); }
+.font-mono { font-family: 'Courier New', monospace; }
+.uppercase { text-transform: uppercase; }
+.tracking-wide { letter-spacing: 0.1em; }
+.tracking-widest { letter-spacing: 0.2em; }
+
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.flex-col { display: flex; flexDirection: column; }
+
+/* Sections */
+.section-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0 10%;
+}
+
+.section-centered {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Service Card */
+.service-card {
+  padding: 2rem;
+  border-radius: 1rem;
+  background: rgba(30, 30, 30, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  margin-bottom: 2rem;
+  max-width: 400px;
+  transition: transform 0.2s ease;
+  color: #ffffff;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+}
+
+.glow-effect {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 40%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Neo-Brutalist Grid */
+.neo-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .neo-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.neo-box {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+  border: 4px solid #1a1a1a;
+  box-shadow: 8px 8px 0px 0px #1a1a1a;
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+  position: relative;
+  color: #1a1a1a; /* Dark text for contrast on bright backgrounds */
+}
+
+.neo-box h3 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.neo-box p {
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 0.8;
+  color: #1a1a1a;
+  line-height: 1.4;
+}
+
+.neo-box:hover {
+  transform: translate(-4px, -4px) rotate(0deg) !important; /* Reset rotation on hover */
+  box-shadow: 12px 12px 0px 0px #1a1a1a;
+}
+
+.neo-box:active {
+  transform: translate(2px, 2px) !important;
+  box-shadow: 4px 4px 0px 0px #1a1a1a;
+}
+
+/* Horizontal Scroll */
+.horizontal-scroll-container {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px), 
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-color: #1a1a1a;
+  backdrop-filter: blur(5px);
+  color: #ffffff;
+}
+
+.horizontal-track {
+  display: flex;
+  gap: 4rem;
+  padding: 0 10%;
+  width: fit-content;
+}
+
+.horizontal-card {
+  min-width: 400px;
+  height: 500px;
+  background: #2a2a2a;
+  border-radius: 1rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid #444;
+  color: #ffffff;
+}
+
+.horizontal-card p, .service-card p {
+  color: #cccccc;
+}
+
+/* Buttons */
+.btn-primary {
+  padding: 1rem 3rem;
+  font-size: 1.2rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.1em;
+  transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: #c66a50;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2rem; }
+  
+  .section-screen {
+    padding: 0 5%;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .horizontal-card {
+    min-width: 300px;
+    height: 400px;
+  }
+}
