@@ -117,8 +117,8 @@ const GoldenThread = () => {
       scrollTrigger: {
         trigger: containerRef.current,
         start: "top top",
-        end: "bottom bottom",
-        scrub: 1,
+        end: () => `+=${svgPaths[0].getTotalLength()}`,
+        scrub: 1.5,
       }
     });
 
