@@ -26,58 +26,37 @@ const GoldenThread = () => {
       // End Bottom Center
       
       const centerX = width / 2;
-      const amplitude = Math.min(width * 0.4, 200); // 40% of width or max 200px
+      const amplitude = Math.min(width * 0.4, 300); // Smoother S-curve
       const sectionHeight = height / 4;
 
-      // Base points for a smooth S-curve
-      // M startX startY
-      // C cp1x cp1y, cp2x cp2y, endX endY
-      
-      // Point 0: Start from Upper-Right (approx 10vh down)
-      const p0 = { x: width, y: sectionHeight * 0.15 };
-      const p_horiz_end = { x: width * 0.7, y: p0.y }; // End of the initial horizontal line
-      
-      // Point 1: First Peak (Left Side) - This is now the first curve destination
-      const p1 = { x: centerX - amplitude, y: sectionHeight * 1.5 };
-      
-      // Point 2: Second Peak (Right Side)
-      const p2 = { x: centerX + amplitude, y: sectionHeight * 2.5 };
-      
-      // Point 3: Bottom Center
-      const p3 = { x: centerX, y: height };
+      // Base points for a smooth S-curve from top-center
+      const p0 = { x: centerX, y: 0 };
+      const p1 = { x: centerX + amplitude, y: sectionHeight };
+      const p2 = { x: centerX - amplitude, y: sectionHeight * 2 };
+      const p3 = { x: centerX, y: sectionHeight * 3 }; // End before the absolute bottom for aesthetics
 
       // Helper to create Bezier curve string
       const generatePathString = (offsetX) => {
         // Apply offset to X coordinates
         const x0 = p0.x + offsetX;
-        const x_horiz_end = p_horiz_end.x + offsetX;
         const x1 = p1.x + offsetX;
         const x2 = p2.x + offsetX;
         const x3 = p3.x + offsetX;
         
-        // Control points - Vertical flow (downwards tangents)
-        // Mid-points in Y for smooth transitions
-        const y01 = (p_horiz_end.y + p1.y) / 2; // Curve starts from the horizontal end point
+        // Control points for a smooth vertical flow
+        const y01 = (p0.y + p1.y) / 2;
         const y12 = (p1.y + p2.y) / 2;
         const y23 = (p2.y + p3.y) / 2;
 
-        // For p_horiz_end to p1: 
-        const cp1 = { x: x_horiz_end, y: y01 };
+        const cp1 = { x: x0, y: y01 };
         const cp2 = { x: x1, y: y01 };
-        
-        // For p1 to p2:
-        const cp3 = { x: x1, y: y12 };
+        // cp3 is implied by S command
         const cp4 = { x: x2, y: y12 };
-        
-        // For p2 to p3:
-        const cp5 = { x: x2, y: y23 };
+        // cp5 is implied by S command
         const cp6 = { x: x3, y: y23 };
 
-        return `M ${x0} ${p0.y} 
-                L ${x_horiz_end} ${p_horiz_end.y}
-                C ${cp1.x} ${cp1.y}, ${cp2.x} ${cp2.y}, ${x1} ${p1.y}
-                S ${cp4.x} ${cp4.y}, ${x2} ${p2.y}
-                S ${cp6.x} ${cp6.y}, ${x3} ${p3.y}`;
+        // Using C for the first segment and S (smooth curve to) for subsequent ones
+        return `M ${x0} ${p0.y} C ${cp1.x} ${cp1.y}, ${cp2.x} ${cp2.y}, ${x1} ${p1.y} S ${cp4.x} ${cp4.y}, ${x2} ${p2.y} S ${cp6.x} ${cp6.y}, ${x3} ${p3.y}`;
       };
 
       // Calculate offsets for parallel lines
