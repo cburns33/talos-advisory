@@ -4,7 +4,17 @@ import LoadingScreen from './components/LoadingScreen';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import './components/ClientLogos.css';
 import './App.css';
+
+import CapabilitiesCardGrid from './components/CapabilitiesCardGrid';
+
+import ifsLogo from './assets/IFS_logo.svg';
+import jblLogo from './assets/JBL_logo.svg';
+import kasasaLogo from './assets/Kasasa_logo.svg';
+import retailmenotLogo from './assets/RetailMeNot_logo.svg';
+import tricorbraunLogo from './assets/Tricorbraun_logo.svg';
+import offersComLogo from './assets/offers-com_logo.svg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,311 +27,210 @@ const TextReveal = ({ children, delay = 0 }) => {
       { y: 50, opacity: 0 },
       { y: 0, opacity: 1, duration: 1, delay: delay, ease: "power3.out" }
     );
-  }, { scope: el });
+  });
   return <div ref={el}>{children}</div>;
 };
 
-const KineticText = ({ text }) => {
-  const textRef = useRef(null);
-  useGSAP(() => {
-    gsap.to(textRef.current, {
-      scrollTrigger: {
-        trigger: textRef.current,
-        start: "top bottom",
-        end: "bottom top",
-        onUpdate: (self) => {
-          const skew = self.getVelocity() / 300;
-          gsap.to(textRef.current, { skewX: skew, overwrite: true, duration: 0.1 });
-        }
-      }
-    });
-  }, { scope: textRef });
-  return (
-    <div style={{ overflow: 'hidden' }}>
-      <h2 ref={textRef} style={{ fontSize: '4rem', whiteSpace: 'nowrap', display: 'inline-block', margin: 0 }}>
-        {text}
-      </h2>
-    </div>
-  );
-};
-
-const ServiceCard = ({ title, value, description }) => {
-  const cardRef = useRef(null);
-  const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    cardRef.current.style.setProperty('--mouse-x', `${x}px`);
-    cardRef.current.style.setProperty('--mouse-y', `${y}px`);
-  };
-  return (
-    <div 
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      className="service-card"
-    >
-      <div 
-        className="glow-effect"
-      />
-      <div style={{ position: 'relative', zIndex: 2 }}>
-        <h3 style={{ fontSize: '2.5rem', color: 'var(--primary)', margin: '0 0 0.5rem 0' }}>{value}</h3>
-        <h4 style={{ fontSize: '1.2rem', margin: '0 0 1rem 0', fontWeight: 600 }}>{title}</h4>
-        <p style={{ fontSize: '0.9rem', color: '#ccc', margin: 0 }}>{description}</p>
-      </div>
-    </div>
-  );
-};
-
-const CapabilitiesCardGrid = () => {
-  const capabilities = [
-    { 
-      title: "PAID SEARCH", 
-      desc: "High-intent capture. Zero waste.", 
-      color: "var(--color-terracotta)", 
-      rotate: "-1deg",
-      textColor: "var(--text)"
-    },
-    { 
-      title: "ANALYTICS", 
-      desc: "Truthful data. No black boxes.", 
-      color: "var(--color-dusk-blue)", 
-      rotate: "1deg",
-      textColor: "#ffffff" // Keep white for contrast
-    },
-    { 
-      title: "AI AGENTS", 
-      desc: "The Librarian Model. Scale infinite content.", 
-      color: "var(--color-sandy-brown)", 
-      rotate: "-2deg",
-      textColor: "var(--text)"
-    },
-    { 
-      title: "CRM & OPS", 
-      desc: "Full-funnel wiring. Lead velocity.", 
-      color: "var(--color-tropical-teal)", 
-      rotate: "2deg",
-      textColor: "var(--text)"
-    }
-  ];
-
-  return (
-    <div className="neo-grid">
-      {capabilities.map((cap, i) => (
-        <div 
-          key={i}
-          className="neo-box"
-          style={{ 
-            backgroundColor: cap.color,
-            transform: `rotate(${cap.rotate})`,
-            color: cap.textColor
-          }}
-        >
-          <h3 style={{ color: cap.textColor }}>{cap.title}</h3>
-          <p style={{ color: cap.textColor }}>{cap.desc}</p>
-        </div>
-      ))}
-    </div>
-  );
-};
-
-const HorizontalScroll = ({ items }) => {
-  const containerRef = useRef(null);
-  const trackRef = useRef(null);
-
-  useGSAP(() => {
-    const track = trackRef.current;
-    const cards = gsap.utils.toArray('.horizontal-card', track);
-    
-    // Calculate total width to scroll
-    // We want to scroll until the last card is visible
-    const totalWidth = cards.length * 400; // 400px per card approx
-
-    gsap.to(track, {
-      xPercent: -100 * (cards.length - 1),
-      ease: "none",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        pin: true,
-        scrub: 1,
-        // snap: 1 / (cards.length - 1), // Optional: snap to cards
-        end: "+=4000", // Slower scroll
-      }
-    });
-  }, { scope: containerRef });
-
-  return (
-    <section 
-      ref={containerRef} 
-      className="horizontal-scroll-container"
-    >
-      <div 
-        ref={trackRef}
-        className="horizontal-track"
-      >
-        <div style={{ minWidth: '300px' }}>
-          <h2 className="text-primary" style={{ lineHeight: 1 }}>THE<br/>TECH<br/>STACK</h2>
-          <p style={{ marginTop: '1rem' }}>Tools we master.</p>
-        </div>
-        {items.map((item, i) => (
-          <div 
-            key={i} 
-            className="horizontal-card"
-          >
-            <h3 style={{ fontSize: '2rem', marginBottom: '1rem' }}>{item.title}</h3>
-            <p style={{ fontSize: '1.1rem', color: '#ccc', lineHeight: 1.6 }}>{item.desc}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-};
-
-const rotatingWords = [
-  { word: 'Humans', color: 'var(--color-terracotta)' },
-  { word: 'Skeptics', color: 'var(--color-dusk-blue)' },
-  { word: 'eCommerce', color: 'var(--color-sandy-brown)' },
-  { word: 'Innovators', color: 'var(--color-tropical-teal)' },
-  { word: 'Disruptors', color: 'var(--color-cool-steel)' },
+// This array is defined outside the component to prevent it from being recreated on every render.
+const words = [
+  { text: 'Humans', color: 'var(--color-terracotta)' },
+  { text: 'Skeptics', color: 'var(--color-sandy-brown)' },
+  { text: 'eCommerce', color: 'var(--color-dusk-blue)' },
+  { text: 'Innovators', color: 'var(--color-tropical-teal)' },
+  { text: 'Disruptors', color: 'var(--color-cool-steel)' },
 ];
 
 const Headline = () => {
+  const TRANSITION_MS = 500;
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [containerWidth, setContainerWidth] = useState('auto');
   const [isJumping, setIsJumping] = useState(false);
-  const itemRefs = useRef([]);
-
-  // Create a seamless loop by duplicating the first item at the end
-  const loopedWords = [...rotatingWords, rotatingWords[0]];
-
-  useLayoutEffect(() => {
-    if (itemRefs.current.length > 0) {
-      const widths = itemRefs.current.map(el => el.scrollWidth);
-      const maxWidth = Math.max(...widths);
-      setContainerWidth(`${maxWidth}px`);
-    }
-  }, [loopedWords]);
 
   useEffect(() => {
-    const rotationInterval = setInterval(() => {
-      setCurrentIndex(prevIndex => prevIndex + 1);
-    }, 2500);
-    return () => clearInterval(rotationInterval);
-  }, []);
+    const interval = setInterval(() => {
+      setCurrentIndex(prevIndex => {
+        const nextIndex = prevIndex + 1;
 
-  useEffect(() => {
-    // Check if we are at the duplicated last item
-    if (currentIndex === loopedWords.length - 1) {
-      // After the transition to the duplicate item finishes...
-      const jumpTimer = setTimeout(() => {
-        // ...disable transitions via the class, and jump back to the start.
-        setIsJumping(true);
-        setCurrentIndex(0);
-      }, 500); // This MUST match the CSS transition duration
+        if (nextIndex === words.length) {
+          // After animating to the clone, jump back to the start without a transition
+          setTimeout(() => {
+            setIsJumping(true); // Disable transition
+            setCurrentIndex(0); // Jump to the real first item
 
-      return () => clearTimeout(jumpTimer);
-    }
+            // Re-enable transition after the jump has been rendered
+            setTimeout(() => {
+              setIsJumping(false);
+            }, 50);
+          }, TRANSITION_MS); // This duration MUST match the CSS transition time
+        }
+        return nextIndex;
+      });
+    }, 2000);
 
-    // If we just jumped, re-enable transitions after a render cycle.
-    if (isJumping) {
-      const transitionTimer = setTimeout(() => {
-        setIsJumping(false);
-      }, 50); // A small delay to allow React to render the jump first.
-
-      return () => clearTimeout(transitionTimer);
-    }
-  }, [currentIndex, isJumping, loopedWords.length]);
+    return () => clearInterval(interval);
+  }, []); // Dependency array is empty as `words` is a stable constant
 
   return (
     <div className="headline-section">
-      <div className="headline-line">
-        Marketing for{" "}
-        <div className={`rotating-text-container ${isJumping ? 'no-transition' : ''}`} style={{ width: containerWidth }}>
-          {loopedWords.map((item, index) => (
-            <span
-              key={`${item.word}-${index}`}
-              ref={el => (itemRefs.current[index] = el)}
-              className="rotating-text-item"
-              style={{
-                transform: `translateY(${(index - currentIndex) * -100}%)`,
-                color: item.color,
-              }}
-            >
-              {item.word}
+      <h1 className="headline-line">
+        Marketing for&nbsp;
+        <span className="rotating-text-container">
+          <span
+            className={`rotating-text-list`}
+            style={{
+              transition: isJumping ? 'none' : `transform ${TRANSITION_MS}ms ease-in-out`,
+              transform: `translateY(-${currentIndex * 1.2}em)`
+            }}
+          >
+            {words.map((word) => (
+              <span key={word.text} className="rotating-text-item" style={{ color: word.color }}>
+                {word.text}
+              </span>
+            ))}
+            {/* Cloned first element to create the seamless loop illusion */}
+            <span key="clone" className="rotating-text-item" style={{ color: words[0].color }}>
+              {words[0].text}
             </span>
-          ))}
-        </div>
-      </div>
+          </span>
+        </span>
+      </h1>
       <div className="headline-line">By a Human.</div>
       <div className="headline-line">With AI.</div>
     </div>
   );
 };
 
-function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  const techStack = [
-    { title: "Paid Search", desc: "Google Ads, Microsoft Ads. Automated bidding strategies that actually work." },
-    { title: "Analytics", desc: "GA4, Looker, SQL. Truthful data pipelines that reveal the actual ROI." },
-    { title: "AI Operations", desc: "OpenAI, Anthropic, Custom Agents. Building the 'Librarian' to scale your content." },
-    { title: "CRM / MAP", desc: "Salesforce, HubSpot, Marketo. Connecting the pipes so no lead is left behind." }
+const ClientLogos = () => {
+  const logos = [
+    { src: ifsLogo, alt: 'IFS' },
+    { src: jblLogo, alt: 'JBL' },
+    { src: kasasaLogo, alt: 'Kasasa' },
+    { src: retailmenotLogo, alt: 'RetailMeNot' },
+    { src: tricorbraunLogo, alt: 'TricorBraun' },
+    { src: offersComLogo, alt: 'Offers.com' },
   ];
 
   return (
-    <div className="app-container" style={{ position: 'relative', minHeight: '400vh' }}>
-      {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
+    <section className="client-logos-section">
+      <h2 className="client-logos-title">Brands I've Helped Build</h2>
+      <div className="logos-container">
+        {logos.map((logo, index) => (
+          <img key={index} src={logo.src} alt={logo.alt} className="client-logo" />
+        ))}
+      </div>
+    </section>
+  );
+};
+
+const ProblemSection = () => (
+    <section className="page-section text-center">
+        <div className="container">
+            <h2 className="section-title">You're Flying Blind</h2>
+            <p className="section-subtitle">You have the data. You have the dashboards. But you don't have clarity. You're making decisions on gut-feel, wasting budget, and missing opportunities.</p>
+        </div>
+    </section>
+);
+
+const ProcessSection = () => (
+    <section className="page-section">
+        <div className="container text-center">
+            <h2 className="section-title">The Process</h2>
+            <div className="process-steps">
+                <div className="process-step">
+                    <h3>1. The Audit</h3>
+                    <p>A comprehensive deep-dive into your Paid Search, Demand Gen, and Tech Ops. We find the signal in your noise.</p>
+                </div>
+                <div className="process-step">
+                    <h3>2. The Blueprint</h3>
+                    <p>We deliver a clear, actionable plan to fix the leaks, scale the winners, and build a predictable growth engine.</p>
+                </div>
+                <div className="process-step">
+                    <h3>3. The Execution</h3>
+                    <p>We partner with your team to implement the blueprint, providing hands-on support and training along the way.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+);
+
+const FinalCTA = () => (
+    <section className="page-section text-center final-cta">
+        <div className="container">
+            <h2 className="section-title">Stop Guessing. Start Growing.</h2>
+            <p className="section-subtitle">Let's find the signal in your noise. Get the truth about what's working, what's not, and what to do next.</p>
+            <button className="btn-primary">
+                GET THE TRUTH
+            </button>
+        </div>
+    </section>
+);
+
+function App() {
+  const [isLoading, setIsLoading] = useState(true);
+  const mainContentRef = useRef();
+
+  const handleLoadingComplete = () => {
+    setIsLoading(false);
+  };
+
+  useGSAP(() => {
+    if (!isLoading) {
+      // Animate in the main content after loading
+      gsap.fromTo(mainContentRef.current, 
+        { opacity: 0 }, 
+        { opacity: 1, duration: 1, ease: 'power2.inOut' }
+      );
+    }
+
+    // Toggle body scroll
+    if (isLoading) {
+      document.body.classList.add('loading');
+    } else {
+      document.body.classList.remove('loading');
+    }
+
+    // Cleanup function
+    return () => {
+      document.body.classList.remove('loading');
+    };
+  }, { dependencies: [isLoading] });
+
+  return (
+    <div className="App">
+      {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
+      
       <GoldenThread />
       
-      <main style={{ position: 'relative', zIndex: 1 }}>
+      <div ref={mainContentRef} style={{ position: 'relative', zIndex: 1, opacity: isLoading ? 0 : 1 }}>
+        <main>
         
-        {/* Hero - Thread Top Right, Content Left */}
-        <section className="section-screen" style={{ justifyContent: 'flex-start', alignItems: 'center' }}>
-           <div style={{ width: '100%', padding: '0 2rem' }}>
-             <Headline />
-             <TextReveal delay={0.8}>
-               <p style={{ maxWidth: '450px', marginTop: '1.5rem' }}>
-                 Talos Advisory finds the signal in the noise. No vanity metrics. No black boxes. Just revenue-driving strategy.
-               </p>
-             </TextReveal>
-           </div>
-        </section>
+          {/* Hero Section */}
+          <section className="section-screen" style={{ justifyContent: 'flex-start', alignItems: 'center' }}>
+            <div style={{ width: '100%', padding: '0 2rem' }}>
+              <Headline />
+            </div>
+          </section>
 
-        {/* The Noise - Thread Left, Content Right */}
-        <section className="section-screen" style={{ justifyContent: 'flex-end' }}>
-          <div style={{ maxWidth: '600px', textAlign: 'right' }}>
-            <h2 className="tracking-widest uppercase" style={{ fontSize: '1rem', color: '#aaa', marginBottom: '2rem' }}>The Problem</h2>
-            <KineticText text="VANITY METRICS / BLACK BOXES / WASTE" />
-            <p style={{ marginTop: '2rem', marginLeft: 'auto', maxWidth: '500px' }}>
-              Most agencies hide behind "green" metrics like CTR and Impressions. 
-              We don't. If it doesn't drive <span className="text-primary">Revenue</span>, it's just noise.
-            </p>
-          </div>
-        </section>
+          {/* Social Proof */}
+          <ClientLogos />
 
-        {/* The Signal - Capabilities Cards */}
-        <section className="section-screen" style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-          <div style={{ width: '100%', maxWidth: '1000px' }}>
-            <h2 className="text-primary tracking-widest uppercase" style={{ fontSize: '1rem', marginBottom: '3rem', textAlign: 'center' }}>The Capabilities Cards</h2>
-            <CapabilitiesCardGrid />
-          </div>
-        </section>
+          {/* The Problem */}
+          <ProblemSection />
 
-        {/* Horizontal Scroll - Tech Stack */}
-        <HorizontalScroll items={techStack} />
+          {/* The Solution */}
+          <section className="page-section">
+            <div className="container">
+                <CapabilitiesCardGrid />
+            </div>
+          </section>
 
-        {/* The Audit - Thread Center, Content Center */}
-        <section className="section-centered">
-          <h2 style={{ marginBottom: '1rem' }}>THE TALOS AUDIT</h2>
-          <p style={{ maxWidth: '600px', marginBottom: '2rem' }}>
-            A comprehensive deep-dive into your Paid Search, Demand Gen, and Tech Ops. 
-            We find the signal in your noise.
-          </p>
-          <button className="btn-primary">
-            GET THE TRUTH
-          </button>
-        </section>
-      </main>
+          {/* The Process */}
+          <ProcessSection />
+
+          {/* Final CTA */}
+          <FinalCTA />
+
+        </main>
+        </div>
     </div>
   );
 }

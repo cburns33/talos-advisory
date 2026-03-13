@@ -1,0 +1,53 @@
+.client-logos-section {
+  position: relative;
+  padding: 6rem 2rem 12rem 2rem; /* Added more bottom padding to push content up */
+  text-align: center;
+  background-image: url('../assets/layered-waves-haikei.svg');
+  background-size: cover;
+  background-position: center bottom; /* Align to the bottom to keep waves at the bottom */
+  overflow: hidden;
+}
+
+.client-logos-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #FFFFFF; /* White text for the dark blue top of the SVG */
+  margin-bottom: 4rem;
+}
+
+.logos-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Default to 2 columns for mobile */
+  justifya_items: center;
+  aligna_items: center;
+  gap: 3rem 2rem;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Media query for tablets and desktops */
+@media (min-width: 768px) {
+  .logos-container {
+    grid-template-columns: repeat(3, 1fr); /* Switch to 3 columns */
+    gap: 3rem 4rem;
+    padding: 0;
+  }
+}
+
+.client-logo {
+  max-height: 80px;
+  width: 100%;
+  padding: 0 1rem;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+
+.client-logo:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.1);
+}

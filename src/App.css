@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Kalam:wght@400;700&family=Montserrat:wght@700&display=swap');
+
+body.loading {
+  overflow: hidden;
+}
+
 /* Global Reset */
 :root {
   /* Brand Palette (OKLCH) */
@@ -8,7 +14,8 @@
   --color-cool-steel: oklch(70.1% 0.03 220.5); /* #93a8ac */
 
   /* UI Palette (OKLCH) */
-  --bg: oklch(0.9376 0.0199 77.31);             /* #f2e9dc */
+  --bg: oklch(0.9376 0.0199 77.31); /* Main page background - F2E9DC */
+  --bg-alt: oklch(0.96 0.01 88);      /* Alt background - F7F2ED */             /* #f2e9dc */
   --bg-dark: oklch(88.9% 0.02 87.9);          /* #e6dac8 */
   --text: oklch(15.98% 0 0);                /* #1a1a1a */
   --text-muted: oklch(36.3% 0 0);           /* #4a4a4a */
@@ -31,9 +38,23 @@ body {
   overflow-x: hidden; /* Prevents horizontal scroll/overflow */
 }
 
+/* Global Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem; /* Default horizontal padding */
+}
+
+/* Mobile adjustment for container padding */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem; /* Smaller padding on mobile */
+  }
+}
+
 /* Headline Section */
 .headline-section {
-  padding: 0 2rem; /* Adds horizontal padding for mobile margins */
+  padding: 0 2rem;
   max-width: 1200px;
   margin: 0 auto;
   height: 60vh;
@@ -43,45 +64,50 @@ body {
 }
 
 .headline-line {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap; /* Allows wrapping on mobile if needed */
   font-family: 'Montserrat', sans-serif;
-  font-weight: 700; /* Bold */
+  font-weight: 700;
   font-size: 4rem;
   line-height: 1.2;
   color: var(--text);
   text-align: left;
 }
 
-/* Rotating Text Animation */
 .rotating-text-container {
+  height: 1.2em; /* relative to current font-size */
+  min-width: 12ch; /* Sized to the longest word */
   display: inline-block;
-  font-family: 'Kalam', cursive;
-  font-weight: 400; /* Regular */
-  height: 4.8rem; /* Set to match parent line-height (4rem * 1.2) */
-  vertical-align: bottom;
+  vertical-align: baseline;
   overflow: hidden;
-  position: relative;
 }
 
-.rotating-text-item {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%; /* Fill the container now that it has a width */
-  transition: transform 0.5s ease-in-out;
+.rotating-text-list {
+  display: block;
 }
 
-/* A helper class to disable the transition for the seamless loop jump */
-.rotating-text-container.no-transition .rotating-text-item {
+.rotating-text-list.no-transition {
   transition: none;
 }
 
-/* Adjust font size on smaller screens for better layout */
+.rotating-text-item {
+  height: 1.2em; /* relative to current font-size */
+  line-height: 1.2em; /* Vertically centers text */
+  display: block;
+  font-family: 'Kalam', cursive;
+  font-weight: 400;
+}
+
+
+/* --- Responsive --- */
 @media (max-width: 768px) {
-  .headline-line {
-    font-size: 2.5rem;
+  .headline-section {
+    padding: 4rem 1.5rem;
   }
-  .rotating-text-container {
-    height: 2.7rem;
+
+  .headline-line {
+    font-size: 2.5rem; 
   }
 }
 
@@ -111,7 +137,8 @@ p { font-size: 1.1rem; line-height: 1.6; color: var(--text-muted); }
   display: flex;
   align-items: center;
   position: relative;
-  padding: 0 10%;
+  /* Adjust padding to match container's horizontal padding */
+  padding: 0 2rem; /* Changed from 0 10% */
 }
 
 .section-centered {
@@ -216,7 +243,7 @@ p { font-size: 1.1rem; line-height: 1.6; color: var(--text-muted); }
   display: flex;
   align-items: center;
   background-size: 40px 40px;
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px), 
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
                     linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   background-color: #1a1a1a;
   backdrop-filter: blur(5px);
@@ -226,7 +253,8 @@ p { font-size: 1.1rem; line-height: 1.6; color: var(--text-muted); }
 .horizontal-track {
   display: flex;
   gap: 4rem;
-  padding: 0 10%;
+  /* Adjust padding to match container's horizontal padding */
+  padding: 0 2rem; /* Changed from 0 10% */
   width: fit-content;
 }
 
@@ -265,20 +293,77 @@ p { font-size: 1.1rem; line-height: 1.6; color: var(--text-muted); }
   background: #c66a50;
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-  h1 { font-size: 2.5rem; }
-  h2 { font-size: 2rem; }
-  
-  .section-screen {
-    padding: 0 5%;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-  }
-  
-  .horizontal-card {
-    min-width: 300px;
-    height: 400px;
-  }
+/* General Section Styling */
+.page-section {
+  padding: 6rem 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.section-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto 4rem auto;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* Process Section */
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  text-align: left;
+}
+
+.process-step h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--color-terracotta);
+  margin-bottom: 1rem;
+}
+
+.process-step p {
+  line-height: 1.6;
+}
+
+/* Final CTA Section */
+.final-cta {
+  background-color: var(--color-night-sky);
+  color: var(--bg);
+}
+
+.final-cta .section-subtitle {
+    color: #fff;
+    opacity: 0.8;
+}
+
+.btn-primary {
+    background-color: var(--color-terracotta);
+    color: #fff;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-sandy-brown);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
