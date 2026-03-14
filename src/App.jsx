@@ -33,11 +33,11 @@ const TextReveal = ({ children, delay = 0 }) => {
 
 // This array is defined outside the component to prevent it from being recreated on every render.
 const words = [
-  { text: 'Humans', color: 'var(--color-terracotta)' },
-  { text: 'Skeptics', color: 'var(--color-sandy-brown)' },
-  { text: 'eCommerce', color: 'var(--color-dusk-blue)' },
-  { text: 'Innovators', color: 'var(--color-tropical-teal)' },
-  { text: 'Disruptors', color: 'var(--color-cool-steel)' },
+  { text: 'Humans.', color: 'var(--color-terracotta)' },
+  { text: 'Skeptics.', color: 'var(--color-sandy-brown)' },
+  { text: 'eCommerce.', color: 'var(--color-dusk-blue)' },
+  { text: 'Innovators.', color: 'var(--color-tropical-teal)' },
+  { text: 'Disruptors.', color: 'var(--color-cool-steel)' },
 ];
 
 const Headline = () => {

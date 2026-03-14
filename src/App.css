@@ -65,8 +65,8 @@ body {
 
 .headline-line {
   display: flex;
-  align-items: baseline;
-  flex-wrap: wrap; /* Allows wrapping on mobile if needed */
+  align-items: center; /* Changed from baseline to fix font alignment */
+  flex-wrap: nowrap; /* Prevents wrapping on all screen sizes */
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   font-size: 4rem;
@@ -76,8 +76,8 @@ body {
 }
 
 .rotating-text-container {
-  height: 1.2em; /* relative to current font-size */
-  min-width: 12ch; /* Sized to the longest word */
+  height: 1.2em; /* Match parent line-height for consistent spacing */
+  min-width: 13ch; /* Sized to the longest word ("Disruptors.") */
   display: inline-block;
   vertical-align: baseline;
   overflow: hidden;
@@ -92,8 +92,8 @@ body {
 }
 
 .rotating-text-item {
-  height: 1.2em; /* relative to current font-size */
-  line-height: 1.2em; /* Vertically centers text */
+  height: 1.2em; /* Match parent line-height */
+  line-height: 1.2em; /* Match parent line-height */
   display: block;
   font-family: 'Kalam', cursive;
   font-weight: 400;
@@ -107,7 +107,7 @@ body {
   }
 
   .headline-line {
-    font-size: 2.5rem; 
+    font-size: 2.1rem; /* Reduced from 2.5rem to ensure it fits */
   }
 }
 
