@@ -1,57 +1,55 @@
 # Handoff Document: Talos Advisory Landing Page
 
-**Date:** 2026-01-30
-**Project:** Talos Advisory Brand Engine & Landing Page
-**Framework:** React (Vite) + GSAP + Tailwind/CSS
+**Date:** 2026-03-23
+**Project:** Talos Advisory Landing Page
+**Framework:** React 18 (Vite) + GSAP + Custom CSS (OKLCH)
 **Status:** In Development
 
 ---
 
 ## 1. Project Goal
-Build a "Minimalist Technical" landing page for Talos Advisory that features a continuous "Golden Thread" animation—a scroll-linked SVG ribbon that guides the user through the narrative ("The Noise" vs "The Signal").
+Create a minimalist, technical landing page that converts visitors by showcasing expertise and client work. The focus is on business impact (Revenue, MQLs) over vanity metrics, with a brand tone that is candid, witty, and grounded.
 
 ## 2. Current Implementation Status
 
-### A. The Golden Thread (`src/components/GoldenThread.jsx`)
-*   **Status:** Functional & Responsive.
-*   **Logic:** Uses 3 parallel SVG paths (60px, 40px, 20px) with pixel-based Bezier curves calculated on window resize.
-*   **Animation:** GSAP `ScrollTrigger` scrubs the `strokeDashoffset` to "draw" the line as you scroll.
-*   **Alignment:** Starts Top-Right (Hero), curves Left (Problem), curves Right (Solution), centers (Audit).
+### A. Headline Section (`src/App.jsx` & `src/App.css`)
+*   **Status:** **Recently Fixed & Verified.**
+*   **Logic:** A three-line headline with a "slot machine" style rotating word animation.
+*   **Implementation:** Uses React state and CSS `translateY` transforms for the animation, with a cloned element to ensure a seamless loop.
+*   **Recent Fixes (March 2026):** Resolved complex alignment, spacing, and text-wrapping issues to ensure the headline is perfectly centered and responsive on both desktop and mobile.
 
-### B. Brand Engine Narrative (`src/App.jsx`)
-*   **Status:** Implemented (latest version saved).
-*   **Sections:**
-    1.  **Hero:** "Marketing for Humans" (Text Reveal). Thread at Top-Right.
-    2.  **The Noise:** "Vanity Metrics" (Kinetic Text). Thread swings Left.
-    3.  **The Signal:** "Capabilities Cards" (Neo-Brutalist Grid). Thread swings Right.
-    4.  **Tech Stack:** Horizontal Scroll section.
-    5.  **The Audit:** Call to Action. Thread Centers.
+### B. The Golden Thread (`src/components/GoldenThread.jsx`)
+*   **Status:** Functional but needs fine-tuning.
+*   **Logic:** A custom scroll-linked SVG animation with 3 parallel paths that "draws" itself as the user scrolls down the page.
+*   **Implementation:** Uses GSAP `ScrollTrigger` to animate the `strokeDashoffset` of SVG `<path>` elements. The path direction has been inverted from the original design.
 
-### C. Components
-*   `TextReveal`: Staggered entry animation.
-*   `KineticText`: Velocity-based skew effect.
-*   `ServiceCard`: Glassmorphism with mouse-tracking radial glow.
-*   `HorizontalScroll`: Pins the section and scrolls content sideways.
+### C. Capabilities Card Grid (`src/components/CapabilitiesCardGrid.jsx`)
+*   **Status:** Design complete, content is placeholder.
+*   **Design:** Features a Neo-Brutalist aesthetic with bold borders and hard shadows, using the primary brand colors.
 
-### D. Documentation (`documentation/feature-explanation.md`)
-*   Contains the **Framer Code Component** versions of all the above features so they can be ported to the Framer design tool if needed.
+### D. Other Sections
+*   **Loading Screen (`src/components/LoadingScreen.jsx`):** A vanilla `lottie-web` animation that plays once on page load.
+*   **Client Logos (`src/App.jsx` & `src/components/ClientLogos.css`):** A responsive grid of 6 client logos. **Note:** Contains a minor CSS typo (`justify-items` should be `justify-items`).
+*   **Placeholder Content:** The "Problem," "Process," and "Final CTA" sections are currently placeholders with boilerplate text.
 
 ---
 
 ## 3. Environment & Setup
-*   **Root:** `c:\Users\chase\OneDrive\Documents\Talos Advisory\landing-page`
-*   **Run Dev Server:** `npm run dev -- --host`
-*   **Local URL:** `http://localhost:5173`
-*   **Network URL:** `http://192.168.1.197:5173` (Use this for mobile testing).
+*   **Repository Root:** `c:\Users\chase\OneDrive\Documents\Talos Advisory\landing-page`
+*   **Run Dev Server:** Execute `start-server.bat` (runs `npx vite --host`).
+*   **Push to Git:** Execute `push-changes.bat "Your commit message"` to stage, commit, and push all changes to the `main` branch.
 
 ---
 
-## 4. Immediate Next Steps for New Agent
-1.  **Verify Mobile Alignment:** Check the "Golden Thread" path against the text content on mobile. The path coordinates in `GoldenThread.jsx` might need tweaking (`p1`, `p2` y-values) if the text reflows significantly on small screens.
-2.  **Framer Porting:** If the user wants to move to Framer, use the code in `documentation/feature-explanation.md`.
-3.  **Refine Design:** The "Horizontal Scroll" section is functional but basic. It needs styling to match the "Minimalist Technical" aesthetic (e.g., adding the Golden Thread to this section too, or subtle grid backgrounds).
+## 4. Immediate Next Steps
+1.  **Fill Out Content:** Replace the placeholder text in the "Problem," "Process," and "Final CTA" sections with final copy.
+2.  **Fine-Tune Golden Thread:** Review the `GoldenThread.jsx` animation and adjust its path or timing as needed to perfect the effect.
+3.  **Fix CSS Typo:** In `ClientLogos.css`, correct `justify-items` and `align-items` to `justify-items` and `align-items`.
+4.  **Mobile Responsiveness QA:** Continue testing all sections across a range of mobile device sizes to catch any layout issues.
 
 ## 5. Important Files
-*   [App.jsx](file:///c:/Users/chase/OneDrive/Documents/Talos Advisory/landing-page/src/App.jsx) - Main layout and narrative structure.
+*   [App.jsx](file:///c:/Users/chase/OneDrive/Documents/Talos Advisory/landing-page/src/App.jsx) - Main layout and structure, contains the `Headline` component.
+*   [App.css](file:///c:/Users/chase/OneDrive/Documents/Talos Advisory/landing-page/src/App.css) - Contains all global styles and the specific styles for the headline animation.
 *   [GoldenThread.jsx](file:///c:/Users/chase/OneDrive/Documents/Talos Advisory/landing-page/src/components/GoldenThread.jsx) - The core SVG animation logic.
-*   [feature-explanation.md](file:///c:/Users/chase/OneDrive/Documents/Talos Advisory/landing-page/documentation/feature-explanation.md) - Framer code reference.
+*   [CapabilitiesCardGrid.jsx](file:///c:/Users/chase/OneDrive/Documents/Talos Advisory/landing-page/src/components/CapabilitiesCardGrid.jsx) - The Neo-Brutalist card grid component.
+*   [ClientLogos.css](file:///c:/Users/chase/OneDrive/Documents/Talos Advisory/landing-page/src/components/ClientLogos.css) - Styling for the client logos (contains the typo).
