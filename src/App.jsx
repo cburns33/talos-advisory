@@ -69,14 +69,14 @@ const Headline = () => {
 
   return (
     <div className="headline-section">
-      <h1 className="headline-line">
+      <h1 className="headline-line headline-line--primary">
         Marketing for&nbsp;
         <span className="rotating-text-container">
           <span
-            className={`rotating-text-list`}
+            className="rotating-text-list"
             style={{
               transition: isJumping ? 'none' : `transform ${TRANSITION_MS}ms ease-in-out`,
-              transform: `translateY(-${currentIndex * 1.2}em)`
+              transform: `translateY(-${currentIndex * 1.2}em)`,
             }}
           >
             {words.map((word) => (
@@ -90,7 +90,8 @@ const Headline = () => {
           </span>
         </span>
       </h1>
-      <div className="headline-line">By a Human. With AI.</div>
+      <div className="headline-line headline-line--secondary">By a Human.</div>
+      <div className="headline-line headline-line--secondary">With AI.</div>
     </div>
   );
 };
@@ -221,13 +222,13 @@ function App() {
         <main>
         
           {/* Hero Section */}
-          <section className="section-screen hero-section" style={{ justifyContent: 'flex-start', alignItems: 'center' }}>
-            <div style={{ width: '100%', padding: '0 2rem' }}>
+          <section className="section-screen hero-section">
+            <div className="hero-inner container">
               <Headline />
+              <a href="mailto:chase.burns33@gmail.com" className="hero-cta-button">
+                Stop wasting budget
+              </a>
             </div>
-            <a href="mailto:chase.burns33@gmail.com" className="hero-cta-button">
-              Stop wasting budget
-            </a>
           </section>
 
           {/* The Problem */}

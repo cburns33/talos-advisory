@@ -54,10 +54,10 @@ body {
 
 /* Headline Section */
 .headline-section {
-  padding: 0 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  height: 60vh;
+  padding: 0;
+  max-width: none;
+  margin: 0;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -68,11 +68,21 @@ body {
   position: relative;
 }
 
+.hero-inner {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 2rem;
+}
+
 .hero-cta-button {
-  position: absolute;
-  right: 10%;
-  top: 50%;
-  transform: translateY(-50%);
+  position: static;
+  transform: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   padding: 1.2rem 2.5rem;
   background-color: var(--color-terracotta);
   color: #fff;
@@ -80,6 +90,9 @@ body {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   font-size: 1.1rem;
+  line-height: 1.2;
+  max-width: min(14ch, 100%);
+  box-sizing: border-box;
   border-radius: 4px;
   transition: all 0.3s ease;
   box-shadow: 4px 4px 0px 0px #1a1a1a;
@@ -88,21 +101,28 @@ body {
 
 .hero-cta-button:hover {
   background-color: var(--color-sandy-brown);
-  transform: translateY(-50%) translate(-4px, -4px);
+  transform: translate(-4px, -4px);
   box-shadow: 8px 8px 0px 0px #1a1a1a;
 }
 
 .hero-cta-button:active {
-  transform: translateY(-50%) translate(2px, 2px);
+  transform: translate(2px, 2px);
   box-shadow: 2px 2px 0px 0px #1a1a1a;
 }
 
 @media (max-width: 1024px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .headline-section {
+    justify-self: start;
+  }
+
   .hero-cta-button {
-    position: static;
-    transform: none;
-    margin-top: 2rem;
-    display: inline-block;
+    justify-self: end;
   }
   
   .hero-cta-button:hover {
@@ -115,9 +135,7 @@ body {
 }
 
 .headline-line {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  display: block;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   font-size: 4rem;
@@ -126,16 +144,25 @@ body {
   text-align: left;
 }
 
+.headline-line--primary {
+  white-space: nowrap;
+}
+
+.headline-line--secondary {
+  white-space: nowrap;
+}
+
 .rotating-text-container {
   height: 1.2em; /* Match parent line-height for consistent spacing */
   min-width: 13ch; /* Sized to the longest word ("Disruptors.") */
   display: inline-block;
-  vertical-align: baseline;
+  vertical-align: -0.08em;
   overflow: hidden;
 }
 
 .rotating-text-list {
   display: block;
+  will-change: transform;
 }
 
 .rotating-text-list.no-transition {
@@ -154,26 +181,27 @@ body {
 /* --- Responsive --- */
 @media (max-width: 768px) {
   .headline-section {
-    padding: 2rem 1rem;
+    padding: 0;
     height: auto;
-    min-height: 50vh;
+    min-height: 0;
   }
 
   .headline-line {
     font-size: 1.8rem;
-    flex-wrap: wrap;
     word-break: break-word;
   }
   
   .rotating-text-container {
-    min-width: auto;
-    display: inline;
+    min-width: 13ch;
+    display: inline-block;
   }
   
   .hero-cta-button {
-    margin-top: 1.5rem;
+    width: auto;
+    justify-self: end;
     font-size: 0.9rem;
     padding: 1rem 1.5rem;
+    max-width: 14ch;
   }
 }
 
