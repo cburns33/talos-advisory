@@ -16,6 +16,8 @@ import retailmenotLogo from './assets/RetailMeNot_logo.svg';
 import tricorbraunLogo from './assets/Tricorbraun_logo.svg';
 import offersComLogo from './assets/offers-com_logo.svg';
 
+import problemSectionBackground from './assets/the-problem-section-background.svg';
+
 gsap.registerPlugin(ScrollTrigger);
 
 // --- Inline Components ---
@@ -51,23 +53,21 @@ const Headline = () => {
         const nextIndex = prevIndex + 1;
 
         if (nextIndex === words.length) {
-          // After animating to the clone, jump back to the start without a transition
           setTimeout(() => {
-            setIsJumping(true); // Disable transition
-            setCurrentIndex(0); // Jump to the real first item
+            setIsJumping(true);
+            setCurrentIndex(0);
 
-            // Re-enable transition after the jump has been rendered
             setTimeout(() => {
               setIsJumping(false);
             }, 50);
-          }, TRANSITION_MS); // This duration MUST match the CSS transition time
+          }, TRANSITION_MS);
         }
         return nextIndex;
       });
     }, 2000);
 
     return () => clearInterval(interval);
-  }, []); // Dependency array is empty as `words` is a stable constant
+  }, []);
 
   return (
     <div className="headline-section">
@@ -86,15 +86,13 @@ const Headline = () => {
                 {word.text}
               </span>
             ))}
-            {/* Cloned first element to create the seamless loop illusion */}
             <span key="clone" className="rotating-text-item" style={{ color: words[0].color }}>
               {words[0].text}
             </span>
           </span>
         </span>
       </h1>
-      <div className="headline-line">By a Human.</div>
-      <div className="headline-line">With AI.</div>
+      <div className="headline-line">By a Human. With AI.</div>
     </div>
   );
 };
@@ -121,14 +119,40 @@ const ClientLogos = () => {
   );
 };
 
-const ProblemSection = () => (
-    <section className="page-section text-center">
+const ProblemSection = () => {
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  return (
+    <section className="page-section text-center problem-section" style={{ 
+      backgroundImage: `url(${problemSectionBackground})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat'
+    }}>
         <div className="container">
-            <h2 className="section-title">You're Flying Blind</h2>
-            <p className="section-subtitle">You have the data. You have the dashboards. But you don't have clarity. You're making decisions on gut-feel, wasting budget, and missing opportunities.</p>
+            <h2 className="section-title">The Problem</h2>
+            <p className="problem-text">
+                Agencies spend their time "monitoring dashboards" and charging a percentage of spend to auto-apply Google's bad recommendations. If you aren't auditing the{' '}
+                <span 
+                  className="dark-funnel-term"
+                  onMouseEnter={() => setShowTooltip(true)}
+                  onMouseLeave={() => setShowTooltip(false)}
+                  onTouchStart={() => setShowTooltip(true)}
+                  onTouchEnd={() => setShowTooltip(false)}
+                >
+                  Dark Funnel
+                  {showTooltip && (
+                    <span className="dark-funnel-tooltip">
+                      The untrackable part of the buyer journey where demand comes from "invisible" interactions, before even showing up in your CRM. Think of referrals via Slack shares, screenshots, word-of-mouth, etc.
+                    </span>
+                  )}
+                </span>
+                , then you're losing 20% of your budget to clicks you already owned.
+            </p>
         </div>
     </section>
-);
+  );
+};
 
 const ProcessSection = () => (
     <section className="page-section">
@@ -204,24 +228,28 @@ function App() {
         <main>
         
           {/* Hero Section */}
-          <section className="section-screen" style={{ justifyContent: 'flex-start', alignItems: 'center' }}>
+          <section className="section-screen hero-section" style={{ justifyContent: 'flex-start', alignItems: 'center' }}>
             <div style={{ width: '100%', padding: '0 2rem' }}>
               <Headline />
             </div>
+            <a href="mailto:chase.burns33@gmail.com" className="hero-cta-button">
+              Stop wasting budget
+            </a>
           </section>
-
-          {/* Social Proof */}
-          <ClientLogos />
 
           {/* The Problem */}
           <ProblemSection />
 
-          {/* The Solution */}
+          {/* Core Services */}
           <section className="page-section">
-            <div className="container">
+            <div className="container text-center">
+                <h2 className="section-title">Core Services</h2>
                 <CapabilitiesCardGrid />
             </div>
           </section>
+
+          {/* Brands I've Helped Build */}
+          <ClientLogos />
 
           {/* The Process */}
           <ProcessSection />

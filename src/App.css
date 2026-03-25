@@ -63,10 +63,61 @@ body {
   justify-content: center;
 }
 
+/* Hero Section */
+.hero-section {
+  position: relative;
+}
+
+.hero-cta-button {
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 1.2rem 2.5rem;
+  background-color: var(--color-terracotta);
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  box-shadow: 4px 4px 0px 0px #1a1a1a;
+  border: 3px solid #1a1a1a;
+}
+
+.hero-cta-button:hover {
+  background-color: var(--color-sandy-brown);
+  transform: translateY(-50%) translate(-4px, -4px);
+  box-shadow: 8px 8px 0px 0px #1a1a1a;
+}
+
+.hero-cta-button:active {
+  transform: translateY(-50%) translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px #1a1a1a;
+}
+
+@media (max-width: 1024px) {
+  .hero-cta-button {
+    position: static;
+    transform: none;
+    margin-top: 2rem;
+    display: inline-block;
+  }
+  
+  .hero-cta-button:hover {
+    transform: translate(-4px, -4px);
+  }
+  
+  .hero-cta-button:active {
+    transform: translate(2px, 2px);
+  }
+}
+
 .headline-line {
   display: flex;
-  align-items: center; /* Changed from baseline to fix font alignment */
-  flex-wrap: nowrap; /* Prevents wrapping on all screen sizes */
+  align-items: center;
+  flex-wrap: wrap;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   font-size: 4rem;
@@ -103,11 +154,26 @@ body {
 /* --- Responsive --- */
 @media (max-width: 768px) {
   .headline-section {
-    padding: 4rem 1.5rem;
+    padding: 2rem 1rem;
+    height: auto;
+    min-height: 50vh;
   }
 
   .headline-line {
-    font-size: 2.1rem; /* Reduced from 2.5rem to ensure it fits */
+    font-size: 1.8rem;
+    flex-wrap: wrap;
+    word-break: break-word;
+  }
+  
+  .rotating-text-container {
+    min-width: auto;
+    display: inline;
+  }
+  
+  .hero-cta-button {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    padding: 1rem 1.5rem;
   }
 }
 
@@ -129,7 +195,7 @@ p { font-size: 1.1rem; line-height: 1.6; color: var(--text-muted); }
 .tracking-widest { letter-spacing: 0.2em; }
 
 .flex-center { display: flex; align-items: center; justify-content: center; }
-.flex-col { display: flex; flexDirection: column; }
+.flex-col { display: flex; flex-direction: column; }
 
 /* Sections */
 .section-screen {
@@ -137,8 +203,9 @@ p { font-size: 1.1rem; line-height: 1.6; color: var(--text-muted); }
   display: flex;
   align-items: center;
   position: relative;
-  /* Adjust padding to match container's horizontal padding */
-  padding: 0 2rem; /* Changed from 0 10% */
+  padding: 0 1rem;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 .section-centered {
@@ -234,6 +301,17 @@ p { font-size: 1.1rem; line-height: 1.6; color: var(--text-muted); }
 .neo-box:active {
   transform: translate(2px, 2px) !important;
   box-shadow: 4px 4px 0px 0px #1a1a1a;
+}
+
+/* Disable neo-box hover effects when inside flip cards to prevent conflicts */
+.flip-card .neo-box:hover {
+  transform: none !important;
+  box-shadow: 8px 8px 0px 0px #1a1a1a;
+}
+
+.flip-card .neo-box:active {
+  transform: none !important;
+  box-shadow: 8px 8px 0px 0px #1a1a1a;
 }
 
 /* Horizontal Scroll */
@@ -366,4 +444,145 @@ p { font-size: 1.1rem; line-height: 1.6; color: var(--text-muted); }
     background-color: var(--color-sandy-brown);
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Problem Section */
+.problem-section {
+  position: relative;
+  padding: 8rem 0;
+  min-height: 400px;
+}
+
+.problem-section .section-title {
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2rem;
+}
+
+.problem-text {
+  font-size: 1.5rem;
+  line-height: 1.8;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #ffffff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.dark-funnel-term {
+  position: relative;
+  color: var(--color-dusk-blue);
+  font-weight: 700;
+  cursor: help;
+  background-color: #ffffff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.dark-funnel-tooltip {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 0.5rem;
+  padding: 1rem 1.5rem;
+  background-color: var(--color-sandy-brown);
+  color: var(--text);
+  border: 4px solid #1a1a1a;
+  box-shadow: 6px 6px 0px 0px #1a1a1a;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  width: 320px;
+  max-width: 90vw;
+  z-index: 1000;
+  font-weight: 600;
+  text-align: left;
+  animation: tooltipFadeIn 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.dark-funnel-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 8px solid transparent;
+  border-bottom-color: #1a1a1a;
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .problem-text {
+    font-size: 1.2rem;
+  }
+  
+  .dark-funnel-tooltip {
+    width: 280px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Flip Card Styles */
+.flip-card {
+  perspective: 1000px;
+  cursor: pointer;
+  aspect-ratio: 1;
+  transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.flip-card:hover {
+  transform: translate(-4px, -4px) rotate(var(--card-rotation));
+}
+
+.flip-card:hover .neo-box {
+  box-shadow: 12px 12px 0px 0px #1a1a1a;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  top: 0;
+  left: 0;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+.flip-card-back p {
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 1;
+}
+
+.flip-card .neo-box {
+  margin: 0;
 }
