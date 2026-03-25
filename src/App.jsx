@@ -16,8 +16,6 @@ import retailmenotLogo from './assets/RetailMeNot_logo.svg';
 import tricorbraunLogo from './assets/Tricorbraun_logo.svg';
 import offersComLogo from './assets/offers-com_logo.svg';
 
-import problemSectionBackground from './assets/the-problem-section-background.svg';
-
 gsap.registerPlugin(ScrollTrigger);
 
 // --- Inline Components ---
@@ -123,12 +121,7 @@ const ProblemSection = () => {
   const [showTooltip, setShowTooltip] = useState(false);
 
   return (
-    <section className="page-section text-center problem-section" style={{ 
-      backgroundImage: `url(${problemSectionBackground})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat'
-    }}>
+    <section className="page-section text-center problem-section">
         <div className="container">
             <h2 className="section-title">The Problem</h2>
             <p className="problem-text">
