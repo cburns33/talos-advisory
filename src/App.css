@@ -153,8 +153,8 @@ body {
 }
 
 .rotating-text-container {
-  height: 1.2em; /* Match parent line-height for consistent spacing */
-  min-width: 13ch; /* Sized to the longest word ("Disruptors.") */
+  height: 1.2em;
+  min-width: 13ch;
   display: inline-block;
   vertical-align: -0.08em;
   overflow: hidden;
@@ -192,8 +192,9 @@ body {
   }
   
   .rotating-text-container {
-    min-width: 13ch;
+    min-width: auto;
     display: inline-block;
+    transition: width 0.2s ease-out;
   }
   
   .hero-cta-button {

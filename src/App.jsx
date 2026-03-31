@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useLayoutEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import GoldenThread from './components/GoldenThread';
 import LoadingScreen from './components/LoadingScreen';
 import gsap from 'gsap';
@@ -31,6 +31,15 @@ const TextReveal = ({ children, delay = 0 }) => {
   return <div ref={el}>{children}</div>;
 };
 
+// Canvas-based text measurement (native browser API)
+// More accurate than DOM measurements and doesn't cause reflow
+const measureTextWidth = (text, font, size) => {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  ctx.font = `${font.weight || 400} ${size}px ${font.family}`;
+  return ctx.measureText(text).width;
+};
+
 // This array is defined outside the component to prevent it from being recreated on every render.
 const words = [
   { text: 'Humans.', color: 'var(--color-terracotta)' },
@@ -39,6 +48,79 @@ const words = [
   { text: 'Innovators.', color: 'var(--color-tropical-teal)' },
   { text: 'Disruptors.', color: 'var(--color-cool-steel)' },
 ];
+
+// Dynamic text fitting hook using native Canvas API
+const useDynamicTextFit = (textItems, baseFontSize) => {
+  const [fontSize, setFontSize] = useState(baseFontSize);
+
+  useEffect(() => {
+    const calculateOptimalFontSize = () => {
+      // Measure against viewport width (conservative estimate)
+      const viewportWidth = window.innerWidth;
+      // Available width is roughly half the viewport for the rotating text area
+      const availableWidth = viewportWidth < 768 ? viewportWidth * 0.4 : viewportWidth * 0.25;
+
+      const font = {
+        family: 'Kalam, cursive',
+        weight: 400,
+      };
+
+      // Binary search for optimal font size
+      let minSize = 12;
+      let maxSize = baseFontSize * 1.5;
+      let optimalSize = baseFontSize;
+
+      const targetWidth = availableWidth * 0.9; // 10% padding
+
+      // Measure each word at current font size candidate
+      const measureAtSize = (size) => {
+        const maxWidth = Math.max(
+          ...textItems.map(text => measureTextWidth(text, font, size))
+        );
+        return maxWidth;
+      };
+
+      // Binary search (max 10 iterations for precision)
+      for (let i = 0; i < 10; i++) {
+        const mid = (minSize + maxSize) / 2;
+        const widthAtMid = measureAtSize(mid);
+
+        if (widthAtMid <= targetWidth) {
+          optimalSize = mid;
+          minSize = mid;
+        } else {
+          maxSize = mid;
+        }
+      }
+
+      return optimalSize;
+    };
+
+    const updateSize = () => {
+      const newSize = calculateOptimalFontSize();
+      setFontSize(newSize);
+    };
+
+    // Initial calculation
+    updateSize();
+
+    // Debounced resize handler
+    let resizeTimer;
+    const handleResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(updateSize, 250);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      clearTimeout(resizeTimer);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [textItems, baseFontSize]);
+
+  return fontSize;
+};
 
 const Headline = () => {
   const TRANSITION_MS = 500;
